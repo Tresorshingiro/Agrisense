@@ -74,7 +74,7 @@ export default function Dashboard() {
   const total = history.fertilizer.length + history.yields.length + history.map.length;
 
   return (
-    <SafeAreaView style={styles.safe}>
+    <SafeAreaView style={styles.safe} edges={['top']}>
       <ScrollView
         contentContainerStyle={styles.scroll}
         refreshControl={

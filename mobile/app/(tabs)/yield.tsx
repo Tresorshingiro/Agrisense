@@ -12,11 +12,11 @@ import { useApi } from '../../hooks/useApi';
 import { useHistory } from '../../hooks/useHistory';
 import { getCurrentSeason, getSeasonLabel } from '../../utils/season';
 
-const CROPS = ['Maize', 'Beans', 'Irish Potato', 'Sorghum', 'Cassava', 'Wheat'];
+const CROPS = ['Maize', 'Sorghum', 'Cassava', 'Wheat', 'Potatoes', 'Sweet potatoes', 'Soybeans', 'Yams'];
 
 const NATIONAL_AVG: Record<string, number> = {
-  Maize: 2000, Beans: 800, 'Irish Potato': 8000,
-  Sorghum: 1200, Cassava: 9000, Wheat: 1500,
+  Maize: 2000, Sorghum: 1200, Cassava: 9000, Wheat: 1500,
+  Potatoes: 8000, 'Sweet potatoes': 7000, Soybeans: 1800, Yams: 6000,
 };
 
 const DEEP      = '#1a4a2e';
@@ -71,7 +71,7 @@ export default function YieldScreen() {
   const above = result ? result >= nationalAvg : false;
 
   return (
-    <SafeAreaView style={styles.safe}>
+    <SafeAreaView style={styles.safe} edges={['top']}>
 
       {/* Unified dark green header + tabs */}
       <View style={styles.header}>

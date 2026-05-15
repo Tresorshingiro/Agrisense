@@ -220,7 +220,7 @@ export default function MapScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.safe}>
+    <SafeAreaView style={styles.safe} edges={['top']}>
       {/* Search header */}
       <View style={styles.header}>
         <View style={styles.searchBar}>

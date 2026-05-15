@@ -77,7 +77,7 @@ export default function ProfileScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.safe}>
+    <SafeAreaView style={styles.safe} edges={['top']}>
 
       {/* Unified dark green header with avatar */}
       <View style={styles.header}>
