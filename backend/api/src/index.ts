@@ -40,6 +40,15 @@ app.use((err: any, _req: express.Request, res: express.Response, _next: express.
 
 app.listen(PORT, () => {
   console.log(`AgriSense API running on port ${PORT}`);
+
+  // Keep Render free-tier services awake by pinging every 14 minutes
+  const FASTAPI_URL = process.env.FASTAPI_URL ?? 'http://localhost:8000';
+  const SELF_URL    = `https://agrisensenode.onrender.com/health`;
+
+  setInterval(async () => {
+    try { await fetch(SELF_URL); } catch {}
+    try { await fetch(`${FASTAPI_URL}/health`); } catch {}
+  }, 14 * 60 * 1000);
 });
 
 export default app;
