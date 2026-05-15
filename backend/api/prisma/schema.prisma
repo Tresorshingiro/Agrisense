@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  clerkUserId  String   @unique
+  name         String?
+  email        String   @unique
+  role         String   @default("farmer")
+  district     String?
+  createdAt    DateTime @default(now())
+
+  fertilizerPredictions FertilizerPrediction[]
+  yieldPredictions      YieldPrediction[]
+  mapPredictions        MapPrediction[]
+}
+
+model FertilizerPrediction {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  temperature Float
+  humidity    Float
+  moisture    Float
+  soilType    String
+  cropType    String
+  nitrogen    Float
+  phosphorous Float
+  potassium   Float
+  result      String
+  createdAt   DateTime @default(now())
+}
+
+model YieldPrediction {
+  id               String   @id @default(cuid())
+  userId           String
+  user             User     @relation(fields: [userId], references: [id])
+  year             Int
+  rainfallMm       Float
+  pesticidesTonnes Float
+  avgTemp          Float
+  area             String
+  crop             String
+  predictedYield   Float
+  createdAt        DateTime @default(now())
+}
+
+model MapPrediction {
+  id               String   @id @default(cuid())
+  userId           String
+  user             User     @relation(fields: [userId], references: [id])
+  latitude         Float
+  longitude        Float
+  district         String?
+  maizeScore       Int
+  beansScore       Int
+  irishPotatoScore Int
+  sorghumScore     Int
+  cassavaScore     Int
+  createdAt        DateTime @default(now())
+}
